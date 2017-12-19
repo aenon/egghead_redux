@@ -12,6 +12,19 @@ const counter = (state = 0, action) => {
   }
 }
 
+// Counter component
+const Counter = ({
+  value,
+  onIncrement,
+  onDecrement
+}) => (
+  <div>
+    <h1>{value}</h1>
+    <button onClick={onIncrement}> + </button>
+    <button onClick={onDecrement}> - </button>
+  </div>
+)
+
 // store: holds the state object and dispatches actions
 
 // html embed Redux
@@ -23,6 +36,30 @@ const { createStore } = Redux
 
 // specify the reducer that tells how state is updated with 
 // actions
+
+// our implementation of `createStore`
+// const createStore = (reducer) => {
+//   let state
+//   let listeners = []
+
+//   // 3 methods
+//   const getState = () => state
+//   const dispatch = (action) => {
+//     state = reducer(state, action)
+//     listers.forEach(listener => listener())
+//   }
+//   const subscribe = (listener) => {
+//     listeners.push(listener)
+//     return () => {
+//       listeners = listeners.filter(l => l !== listener)
+//     }
+//   }
+
+//   dispatch({}) // get the initial value
+
+//   // returns a Redux store
+//   return { getState, dispatch, subscribe} 
+// }
 
 const store = createStore(counter)
 
@@ -36,8 +73,22 @@ const store = createStore(counter)
 // console.log(store.getState()) // 1
 
 const render = () => {
-  let approot = document.getElementById('root')
-  approot.innerText = store.getState()
+  ReactDOM.render(
+    <Counter 
+      value={store.getState()}
+      onIncrement = {() => 
+        store.dispatch({
+          type: 'INCREMENT'
+        })
+      }
+      onDecrement = {() =>
+        store.dispatch({
+          type: 'DECREMENT'
+        })
+      }
+    />,
+    document.getElementById('root')
+  )
 }
 
 render() // renders the initial state
@@ -47,9 +98,9 @@ render() // renders the initial state
 // note that subscribe() will not be called at beginning
 store.subscribe(render)
 
-document.addEventListener('click', () => {
-  store.dispatch({ type: 'INCREMENT'})
-})
+// document.addEventListener('click', () => {
+//   store.dispatch({ type: 'INCREMENT'})
+// })
 
 // const render = () => {
 //   document.body.innerText = store.getState();
