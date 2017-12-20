@@ -47,7 +47,7 @@ const { createStore } = Redux
 // specify the reducer that tells how state is updated with 
 // actions
 
-// our own implementation of `createStore`
+// // our own implementation of `createStore`
 // const createStore = (reducer) => {
 //   let state
 //   let listeners = []
