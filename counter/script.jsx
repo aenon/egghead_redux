@@ -24,9 +24,8 @@ const counter = (state = 0, action) => {
 const Counter = ({
   value,
   onIncrement,
-  onDecrement
-}) => (
-  <div>
+  onDecrement}) => (
+  <div class="app">
     <h1>{value}</h1>
     <button onClick={onIncrement}> + </button>
     <button onClick={onDecrement}> - </button>
