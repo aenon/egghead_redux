@@ -48,28 +48,18 @@ const createStore = (reducer) => {
 
 const store = createStore(counter)
 
-const render = () => {
-  document.getElementById('root').innerHTML = store.getState()
-}
+const onIncrement = () => store.dispatch({type: 'INCREMENT'})
+const onDecrement = () => store.dispatch({type: 'DECREMENT'})
 
-// const render = () => {
-//   ReactDOM.render(
-//     <Counter 
-//       value={store.getState()}
-//       onIncrement = {() => 
-//         store.dispatch({
-//           type: 'INCREMENT'
-//         })
-//       }
-//       onDecrement = {() =>
-//         store.dispatch({
-//           type: 'DECREMENT'
-//         })
-//       }
-//     />,
-//     document.getElementById('root')
-//   )
-// }
+const render = () => {
+  document.getElementById('root').innerHTML = `
+  <div>
+    <h1>${store.getState()}</h1>
+    <button onClick="onIncrement()"> + </button>
+    <button onClick="onDecrement()"> - </button>
+  </div>    
+  `
+}
 
 render() // renders the initial state when the page first loads
 
@@ -77,7 +67,3 @@ render() // renders the initial state when the page first loads
 // has been dispatched
 // note that subscribe() will not be called at beginning
 store.subscribe(render)
-
-// document.addEventListener('click', () => {
-//   store.dispatch({ type: 'INCREMENT'})
-// })
