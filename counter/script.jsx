@@ -55,7 +55,7 @@ const { createStore } = Redux
 //   const getState = () => state
 //   const dispatch = (action) => {
 //     state = reducer(state, action)
-//     listers.forEach(listener => listener())
+//     listeners.forEach(listener => listener())
 //   }
 //   const subscribe = (listener) => {
 //     listeners.push(listener)
