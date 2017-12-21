@@ -5,9 +5,7 @@
 let state = 0
 
 const updateState = (inc) => {
-  // the line below will be replaced by a reducer
-  state += inc
-  
+  state += inc // reducer
   render()
 }
 
