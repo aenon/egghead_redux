@@ -104,7 +104,3 @@ render() // renders the initial state when the page first loads
 // has been dispatched
 // note that subscribe() will not be called at beginning
 store.subscribe(render)
-
-// document.addEventListener('click', () => {
-//   store.dispatch({ type: 'INCREMENT'})
-// })
