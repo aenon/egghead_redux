@@ -53,7 +53,7 @@ const onDecrement = () => store.dispatch({type: 'DECREMENT'})
 
 const render = () => {
   document.getElementById('root').innerHTML = `
-  <div>
+  <div class="app">
     <h1>${store.getState()}</h1>
     <button onClick="onIncrement()"> + </button>
     <button onClick="onDecrement()"> - </button>

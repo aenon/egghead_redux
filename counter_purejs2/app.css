@@ -1,4 +1,6 @@
-#root {
+.app {
   font-size: 40px;
+  width: 400px;
+  text-align: center;
   margin: 30px;
 }
