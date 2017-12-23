@@ -49,8 +49,8 @@ const render = () => {
   document.getElementById('root').innerHTML = `
   <div class="app">
     <h1>${store.getState()}</h1>
-    <button id="incBtn"> + </button>
     <button id="decBtn"> - </button>
+    <button id="incBtn"> + </button>
   </div>    
   `
   document.getElementById('incBtn').addEventListener(
