@@ -12,8 +12,19 @@ const decrementCounter = (state) => {
   return state - 1;
 };
 
-const counter = (action) => {
-  state += inc // reducer
+const counter = (state = 0, action) => {
+  switch (action.type) {
+    case 'INCREMENT':
+      return incrementCounter(state);
+    case 'DECREMENT':
+      return decrementCounter(state);
+    default:
+      return state;
+  }
+}
+
+const updateState = (action) => {
+  state = counter(state, action)
   render()
 }
 
@@ -22,8 +33,8 @@ const render = () => {
   document.getElementById('root').innerHTML = `
     <div class="app">
       <h1 id="state">${state}</h1>
-      <button onClick="counter()"> - </button>
-      <button onClick="counter(1)"> + </button>
+      <button onClick="updateState({'type': 'DECREMENT'})"> - </button>
+      <button onClick="updateState({'type': 'INCREMENT'})"> + </button>
     </div>    
   `
 }
