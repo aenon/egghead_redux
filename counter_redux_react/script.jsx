@@ -34,7 +34,13 @@ const Counter = ({
 
 // store
 const { createStore } = Redux 
-const store = createStore(counter)
+const persistedState = localStorage.getItem('reduxState') ? JSON.parse(
+  localStorage.getItem('reduxState')
+) : 0
+const store = createStore(
+  counter,
+  persistedState
+)
 
 // 3 important methods of the store: 
 // getState
@@ -61,5 +67,9 @@ const render = () => {
 }
 
 render() // renders the initial state when the page first loads
+
+store.subscribe(() => {
+  localStorage.setItem('reduxState', store.getState())
+})
 
 store.subscribe(render)
