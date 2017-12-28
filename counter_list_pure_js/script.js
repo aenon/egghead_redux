@@ -1,5 +1,6 @@
 // Counter list app using Vanilla JavaScript
 
+// actions
 const addCounter = (list) => {
   return [...list, 0];
 };
@@ -27,7 +28,7 @@ const decrementCounter = (list, index) => {
   ];
 };
 
-let list = [0, 1, 2]
+let list = [0]
 
 // reducer
 const counter = (list = [], action) => {
