@@ -4,7 +4,6 @@
 // component: generates the application interface
 // store: holds the state object and dispatches actions
 
-
 // reducer
 const counter = (state = 0, action) => {
   // state = 0: initial state
@@ -68,8 +67,7 @@ const render = () => {
 
 render() // renders the initial state when the page first loads
 
-store.subscribe(() => {
-  localStorage.setItem('reduxState', store.getState())
-})
-
 store.subscribe(render)
+store.subscribe(() => {
+  localStorage.setItem('reduxState', JSON.stringify(store.getState()))
+})

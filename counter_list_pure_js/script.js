@@ -1,4 +1,4 @@
-// Counter list app using Vanilla JavaScript
+// counter list app in Vanilla JavaScript
 
 // actions
 const addCounter = (list) => {
@@ -28,7 +28,9 @@ const decrementCounter = (list, index) => {
   ];
 };
 
-let list = [0]
+let list = localStorage.getItem('reduxState') ? JSON.parse(
+  localStorage.getItem('reduxState')
+) : []
 
 // reducer
 const counter = (list = [], action) => {
@@ -48,6 +50,7 @@ const counter = (list = [], action) => {
 
 const updateState = (action) => {
   list = counter(list, action)
+  localStorage.setItem('reduxState', JSON.stringify(list))
   render()
 }
 

@@ -1,4 +1,4 @@
-// counter list app using Redux
+// counter list app using Redux and React
 
 // actions
 const addCounter = (list) => {
@@ -21,64 +21,114 @@ const incrementCounter = (list, index) => {
 }
 
 const decrementCounter = (list, index) => {
-
+  return [
+    ...list.slice(0, index),
+    list[index] - 1,
+    ...list.slice(index + 1)
+  ]
 }
 
-// // reducer
-// const counter = (state = 0, action) => {
-//   // state = 0: initial state
-//   switch (action.type) {
-//     // what action do we receive?
-//     case 'INCREMENT':
-//       return state + 1
-//     case 'DECREMENT':
-//       return state - 1
-//     default:
-//     // by default, return the state unchanged
-//       return state
-//   }
-// }
+// reducer
+const reducer = (list = [], action) => {
+  switch (action.type) {
+    case 'ADD':
+      return addCounter(list)
+    case 'REMOVE':
+      return removeCounter(list, action.index)
+    case 'INCREMENT':
+      return incrementCounter(list, action.index)
+    case 'DECREMENT':
+      return decrementCounter(list, action.index)
+    default:
+      return list
+  }
+}
 
-// // component
-// const Counter = ({
-//   value,
-//   onIncrement,
-//   onDecrement}) => (
-//   <div class="app">
-//     <h1>{value}</h1>
-//     <button onClick={onIncrement}> + </button>
-//     <button onClick={onDecrement}> - </button>
-//   </div>
-// )
+// component
+const Counter = ({
+  value,
+  onIncrement,
+  onDecrement}) => (
+  <div class="app">
+    <h1>{value}</h1>
+    <button onClick={onIncrement}> + </button>
+    <button onClick={onDecrement}> - </button>
+  </div>
+)
 
-// // store
-// const { createStore } = Redux 
-// const store = createStore(counter)
+// store
+const { createStore } = Redux
 
-// // 3 important methods of the store: 
-// // getState
-// // dispacth
-// // subscribe
+const persistedState = localStorage.getItem('reduxState') ? JSON.parse(
+  localStorage.getItem('reduxState')
+) : []
 
-// const render = () => {
-//   ReactDOM.render(
-//     <Counter 
-//       value={store.getState()}
-//       onIncrement = {() => 
-//         store.dispatch({
-//           type: 'INCREMENT'
-//         })
-//       }
-//       onDecrement = {() =>
-//         store.dispatch({
-//           type: 'DECREMENT'
-//         })
-//       }
-//     />,
-//     document.getElementById('root')
-//   )
-// }
+const store = createStore(
+  reducer,
+  [0, 0, 1]
+)
 
-// render() // renders the initial state when the page first loads
+const { Component } = React
+class CounterList extends Component {
+  render () {
+    return (
+      <div>
+      <div className="control">
+        <button onClick={() => {
+          store.dispatch({
+            type: 'ADD'
+          })
+        }}>
+          Add Counter
+        </button>
+      </div>
+      <div className="app">{
+        this.props.list.forEach((value, i) => {
+          <div>
+          <h1 id="state">value</h1>
+          <button onClick={() => {
+            store.dispatch({
+              type: 'DECREMENT',
+              index: i
+            })
+          }}>
+            -
+          </button>
+          <button onClick={() => {
+            store.dispatch({
+              type: 'INCREMENT',
+              index: i
+            })
+          }}>
+            +
+          </button>
+          <button onClick={() => {
+            store.dispatch({
+              type: 'REMOVE',
+              index: i
+            })
+          }}>
+            x
+          </button>
+          </div>
+        })
+      }</div>
+      </div>
+    )
+  }
+}
 
-// store.subscribe(render)
+const render = () => {
+  ReactDOM.render(
+    <CounterList 
+      list={store.getState()}
+    />,
+    document.getElementById('root')
+  )
+}
+
+render() 
+store.subscribe(render)
+store.subscribe(() => {
+  localStorage.setItem('reduxState', JSON.stringify(store.getState()))
+})
