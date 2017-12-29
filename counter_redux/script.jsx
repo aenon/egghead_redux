@@ -13,8 +13,8 @@ const counter = (state = 0, action) => {
 }
 
 // our own implementation of Redux createStore function
-const createStore = (reducer) => {
-  let state
+const createStore = (reducer, preloadedState = 0) => {
+  let state = preloadedState
   let listeners = []
 
   // getState: get the current state of the store
@@ -41,9 +41,17 @@ const createStore = (reducer) => {
   // returns a Redux-like store
   return { getState, dispatch, subscribe} 
 }
-// create the Redux store, a single JS object to host the current state
-const store = createStore(counter)
 
+// persisted state using local storage
+const persistedState = localStorage.getItem('reduxState') ? JSON.parse(
+  localStorage.getItem('reduxState')
+) : 0
+// create the Redux store, a single JS object to host the current state
+
+const store = createStore(
+  counter,
+  persistedState
+)
 // listener: this will be replaced with ReactDOM.render + React components
 const render = () => {
   document.getElementById('root').innerHTML = `
@@ -62,5 +70,7 @@ const render = () => {
 }
 // renders the initial state when the page first loads
 render() 
-
 store.subscribe(render)
+store.subscribe(() => {
+  localStorage.setItem('reduxState', store.getState())
+})
