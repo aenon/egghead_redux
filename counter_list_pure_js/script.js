@@ -28,10 +28,6 @@ const decrementCounter = (list, index) => {
   ];
 };
 
-let list = localStorage.getItem('reduxState') ? JSON.parse(
-  localStorage.getItem('reduxState')
-) : []
-
 // reducer
 const counter = (list = [], action) => {
   switch (action.type) {
@@ -47,6 +43,10 @@ const counter = (list = [], action) => {
       return list
   }
 }
+
+let list = localStorage.getItem('reduxState') ? JSON.parse(
+  localStorage.getItem('reduxState')
+) : []
 
 const updateState = (action) => {
   list = counter(list, action)

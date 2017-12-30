@@ -44,33 +44,23 @@ const reducer = (list = [], action) => {
   }
 }
 
-// component
-const Counter = ({
-  value,
-  onIncrement,
-  onDecrement}) => (
-  <div class="app">
-    <h1>{value}</h1>
-    <button onClick={onIncrement}> + </button>
-    <button onClick={onDecrement}> - </button>
-  </div>
-)
-
 // store
 const { createStore } = Redux
 
-const persistedState = localStorage.getItem('reduxState') ? JSON.parse(
-  localStorage.getItem('reduxState')
-) : []
+const persistedState = localStorage.getItem('counterListState') ? JSON.parse(
+  localStorage.getItem('counterListState')
+) : {'list': [0, 1, 2]}
 
 const store = createStore(
   reducer,
-  [0, 0, 1]
+  persistedState
 )
 
+// component
 const { Component } = React
 class CounterList extends Component {
   render () {
+    const {list} = this.props
     return (
       <div>
       <div className="control">
@@ -121,7 +111,7 @@ class CounterList extends Component {
 const render = () => {
   ReactDOM.render(
     <CounterList 
-      list={store.getState()}
+      {...store.getState()}
     />,
     document.getElementById('root')
   )
@@ -130,5 +120,5 @@ const render = () => {
 render() 
 store.subscribe(render)
 store.subscribe(() => {
-  localStorage.setItem('reduxState', JSON.stringify(store.getState()))
+  localStorage.setItem('counterListState', JSON.stringify(store.getState()))
 })
