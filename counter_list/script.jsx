@@ -49,7 +49,7 @@ const { createStore } = Redux
 
 const persistedState = localStorage.getItem('counterListState') ? JSON.parse(
   localStorage.getItem('counterListState')
-) : {'list': [0, 1, 2]}
+) : {'list': [0, 1]}
 
 const store = createStore(
   reducer,
