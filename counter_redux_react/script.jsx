@@ -5,7 +5,7 @@
 // store: holds the state object and dispatches actions
 
 // reducer
-const counter = (state = 0, action) => {
+const counterReducer = (state = 0, action) => {
   // state = 0: initial state
   switch (action.type) {
     // what action do we receive?
@@ -37,7 +37,7 @@ const persistedState = localStorage.getItem('reduxState') ? JSON.parse(
   localStorage.getItem('reduxState')
 ) : 0
 const store = createStore(
-  counter,
+  counterReducer,
   persistedState
 )
 
