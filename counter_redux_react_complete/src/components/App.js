@@ -3,7 +3,7 @@ import React from 'react'
 import CounterContainer from '../containers/CounterContainer'
 import './App.css'
 
-const App = (state) => (
+const App = state => (
   <div className="App">
     <CounterContainer />
   </div>
