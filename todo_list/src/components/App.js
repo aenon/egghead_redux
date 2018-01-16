@@ -1,9 +1,13 @@
 import React from 'react'
+
 import './App.css'
+import TodoList from './TodoList'
+import AddTodo from './AddTodo'
 
 const App = state => (
-  <div classname="App">
-    This is my App.
+  <div className="App">
+    <TodoList />
+    <AddTodo />
   </div>
 )
 
