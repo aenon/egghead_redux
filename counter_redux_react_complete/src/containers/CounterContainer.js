@@ -1,20 +1,12 @@
-import React from 'react'
 import { connect } from 'react-redux'
 import { increase, decrease } from '../actions'
-
-const CounterContainer = ({ value, onIncrement, onDecrement }) => (
-  <div>
-    <h1>{value}</h1>
-    <button onClick={onDecrement}>-</button> 
-    <button onClick={onIncrement}>+</button>
-  </div>
-)
+import Counter from '../components/Counter'
 
 const mapStateToProps = (state) => ({
   value: state
 })
 
-// if dispatch() called in actions, the action function 
+// if dispatch() called in actions, the action function
 // can be put into connect()
 const mapDispatchToProps = (dispatch) => ({
   onIncrement: () => {
@@ -25,9 +17,7 @@ const mapDispatchToProps = (dispatch) => ({
   }
 })
 
-const Counter = connect(
+export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(CounterContainer)
-
-export default Counter
+)(Counter)
