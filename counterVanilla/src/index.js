@@ -13,7 +13,7 @@ const counter = (state, action) => {
     case 'RESET':
       return {value: 0}
     default:
-      return state;
+      return state
   }
 }
 
