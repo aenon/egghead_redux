@@ -1,4 +1,4 @@
-// Counter app using pure JavaScript but Redux ideas
+// Counter app using pure JavaScript but Redux ideas, with persisted state
 import './index.css'
 
 let state = localStorage.getItem('counterState') ? JSON.parse(
