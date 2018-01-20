@@ -9,6 +9,7 @@ const todoList = ({todos, dispatch}) => (
     <ul>
       {todos.map(todo => (
         <Todo
+          key={todo.id}
           text={todo.text}
           onDelete={() => dispatch(delTodo(todo.id))}
         />
@@ -17,8 +18,8 @@ const todoList = ({todos, dispatch}) => (
   </div>
 )
 
-const mapStateToProps = (state) => ({
-  todos: state
+const mapStateToProps = state => ({
+  todos: state.todos
 })
 
 export default connect(

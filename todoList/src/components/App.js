@@ -4,7 +4,7 @@ import './App.css'
 import TodoList from './TodoList'
 import AddTodo from './AddTodo'
 
-const App = state => (
+const App = () => (
   <div className="App">
     <TodoList />
     <AddTodo />

@@ -1,12 +1,12 @@
-const reducer = (state = [], action) => {
+const reducer = (state = {todos: []}, action) => {
   switch (action.type) {
     case 'ADD':
-      return [...state, {
+      return {todos: [...state.todos, {
         id: Date.now(),
         text:  action.text
-      }]
+      }]}
     case 'DELETE':
-      return state.filter(todo => todo.id !== action.id)
+      return {todos: state.todos.filter(todo => todo.id !== action.id)}
     default:
       return state
   }

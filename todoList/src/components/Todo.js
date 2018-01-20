@@ -1,7 +1,7 @@
 import React from 'react'
 
 const todo = ({text, onDelete}) => (
-  <li classname="todo">
+  <li className="todo">
     {text}
     <button onClick={onDelete}>x</button>
   </li>
