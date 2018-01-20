@@ -1,7 +1,7 @@
 import React from 'react'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 
-import {delTodo} from '../actions'
+import { delTodo } from '../actions'
 import Todo from './Todo'
 
 const todoList = ({todos, dispatch}) => (
