@@ -1,17 +1,16 @@
-// React Redux counter
+// React Redux counter with persisted state
 import React from 'react'
-import {render} from 'react-dom'
-import {createStore} from 'redux'
-import {Provider} from 'react-redux'
+import { render } from 'react-dom'
+import { createStore } from 'redux'
+import { Provider } from 'react-redux'
 
 import App from './components/App'
 import reducer from './reducers'
+import { loadState, saveState } from './localStorage'
 
-const persistedState = localStorage.getItem('counterState') ? JSON.parse(
-  localStorage.getItem('counterState')
-) : {value: 0}
-const store = createStore(reducer, persistedState)
-// const store = createStore(reducer)
+const state = loadState({value: 0})
+const store = createStore(reducer, state)
+store.subscribe(() => saveState(store.getState()))
 
 render(
   <Provider store={store}>

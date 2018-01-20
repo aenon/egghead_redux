@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { value, increaseValue, resetValue } from '../actions'
+import { increaseValue, resetValue } from '../actions'
 
 const Counter = ({value, onIncrease, onDecrease, onReset}) => (
   <div className="counter">
